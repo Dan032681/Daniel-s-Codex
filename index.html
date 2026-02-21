@@ -3,37 +3,45 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kids Tic-Tac-Toe</title>
+  <title>Deadline Outbreak: PC Zombie FPS</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <main class="app">
-    <header class="header">
-      <h1>🌟 Kids Tic-Tac-Toe 🌟</h1>
-      <p class="subtitle">Play against a friend on the same PC!</p>
+    <header class="hud-bar">
+      <h1>🧟 Deadline Outbreak</h1>
+      <p>Survive 10 escalating levels and defeat the final boss.</p>
     </header>
 
-    <section class="status-card" aria-live="polite">
-      <p id="statusText">Player 🐱's turn</p>
-      <p id="scoreText">Score — 🐱: 0 | 🐶: 0</p>
+    <section class="hud-grid" aria-live="polite">
+      <div><span>Level</span><strong id="levelText">1 / 10</strong></div>
+      <div><span>Health</span><strong id="healthText">100</strong></div>
+      <div><span>Ammo</span><strong id="ammoText">12 / 12</strong></div>
+      <div><span>Score</span><strong id="scoreText">0</strong></div>
+      <div><span>Zombies Left</span><strong id="zombieText">0</strong></div>
+      <div><span>Status</span><strong id="statusText">Press Start Mission</strong></div>
     </section>
 
-    <section class="board" id="board" aria-label="Tic-Tac-Toe board">
-      <button class="cell" data-index="0" aria-label="Cell 1"></button>
-      <button class="cell" data-index="1" aria-label="Cell 2"></button>
-      <button class="cell" data-index="2" aria-label="Cell 3"></button>
-      <button class="cell" data-index="3" aria-label="Cell 4"></button>
-      <button class="cell" data-index="4" aria-label="Cell 5"></button>
-      <button class="cell" data-index="5" aria-label="Cell 6"></button>
-      <button class="cell" data-index="6" aria-label="Cell 7"></button>
-      <button class="cell" data-index="7" aria-label="Cell 8"></button>
-      <button class="cell" data-index="8" aria-label="Cell 9"></button>
+    <section class="game-shell">
+      <canvas id="gameCanvas" width="960" height="540" aria-label="First person zombie shooter game"></canvas>
+      <div class="crosshair" aria-hidden="true"></div>
     </section>
 
-    <div class="controls">
-      <button id="newRoundBtn" class="control-btn">New Round</button>
-      <button id="resetBtn" class="control-btn alt">Reset Score</button>
-    </div>
+    <section class="controls">
+      <button id="startBtn">Start Mission</button>
+      <button id="pauseBtn">Pause</button>
+      <button id="restartBtn">Restart Campaign</button>
+    </section>
+
+    <section class="tips">
+      <h2>Controls</h2>
+      <ul>
+        <li><strong>Mouse:</strong> Aim left/right</li>
+        <li><strong>Click / Space:</strong> Shoot</li>
+        <li><strong>R:</strong> Reload</li>
+        <li><strong>M:</strong> Toggle music</li>
+      </ul>
+    </section>
   </main>
 
   <script src="script.js"></script>
