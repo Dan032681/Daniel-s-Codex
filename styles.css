@@ -1,11 +1,10 @@
 :root {
-  --bg: #f6fbff;
-  --card: #ffffff;
-  --primary: #5a67ff;
-  --secondary: #ff8fb1;
-  --accent: #27c498;
-  --text: #243042;
-  --shadow: 0 10px 28px rgba(44, 66, 104, 0.18);
+  --bg: #080f1f;
+  --panel: #121c35;
+  --ink: #dce7ff;
+  --accent: #68e3ff;
+  --danger: #ff5e73;
+  --warn: #ffc96d;
 }
 
 * {
@@ -15,119 +14,134 @@
 body {
   margin: 0;
   min-height: 100vh;
-  font-family: "Trebuchet MS", "Comic Sans MS", "Segoe UI", sans-serif;
-  color: var(--text);
-  background: radial-gradient(circle at top, #ddf0ff 0%, var(--bg) 65%);
+  font-family: Inter, Segoe UI, Roboto, Arial, sans-serif;
+  background: radial-gradient(circle at top, #1b2f59, var(--bg) 55%);
+  color: var(--ink);
   display: grid;
   place-items: center;
 }
 
 .app {
-  width: min(92vw, 720px);
-  background: var(--card);
-  border-radius: 20px;
-  padding: 1.5rem 1.25rem 2rem;
-  box-shadow: var(--shadow);
-  text-align: center;
+  width: min(96vw, 1060px);
+  background: linear-gradient(180deg, rgba(18, 28, 53, 0.95), rgba(10, 18, 36, 0.96));
+  border: 1px solid rgba(104, 227, 255, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.45);
+  padding: 1rem;
 }
 
-.header h1 {
+.hud-bar h1 {
   margin: 0;
-  color: var(--primary);
-  font-size: clamp(1.8rem, 3vw, 2.3rem);
+  color: #fff;
 }
 
-.subtitle {
-  margin: 0.6rem 0 1.1rem;
-  color: #4f6282;
-  font-size: 1.05rem;
+.hud-bar p {
+  margin: 0.3rem 0 0.8rem;
+  color: #9db0d8;
 }
 
-.status-card {
-  background: #f1f5ff;
-  border: 2px solid #d8e1ff;
-  border-radius: 14px;
-  padding: 0.7rem;
-  margin: 0 auto 1.2rem;
+.hud-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(150px, 1fr));
+  gap: 0.55rem;
+  margin-bottom: 0.9rem;
 }
 
-#statusText {
-  margin: 0;
-  font-weight: 700;
+.hud-grid div {
+  background: rgba(104, 227, 255, 0.08);
+  border: 1px solid rgba(104, 227, 255, 0.18);
+  border-radius: 10px;
+  padding: 0.5rem 0.65rem;
+}
+
+.hud-grid span {
+  display: block;
+  font-size: 0.75rem;
+  color: #9db0d8;
+}
+
+.hud-grid strong {
   font-size: 1.1rem;
 }
 
-#scoreText {
-  margin: 0.4rem 0 0;
-  color: #4b5f80;
+.game-shell {
+  position: relative;
 }
 
-.board {
-  width: min(86vw, 460px);
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.65rem;
+#gameCanvas {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #000;
+  cursor: crosshair;
 }
 
-.cell {
-  aspect-ratio: 1;
-  border: 0;
-  border-radius: 14px;
-  font-size: clamp(2rem, 7vw, 3rem);
-  font-weight: 700;
-  cursor: pointer;
-  background: #fff6dc;
-  color: #734b00;
-  box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.08);
-  transition: transform 150ms ease, filter 150ms ease;
+.crosshair {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
 }
 
-.cell:hover,
-.cell:focus-visible {
-  transform: translateY(-2px);
-  filter: brightness(1.03);
-  outline: 3px solid #bdd7ff;
+.crosshair::before,
+.crosshair::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  transform: translate(-50%, -50%);
 }
 
-.cell.x {
-  background: #ffe6ee;
-  color: #c83678;
+.crosshair::before {
+  width: 2px;
+  height: 26px;
 }
 
-.cell.o {
-  background: #e5fff5;
-  color: #168d69;
+.crosshair::after {
+  width: 26px;
+  height: 2px;
 }
 
 .controls {
-  margin-top: 1.2rem;
+  margin-top: 0.8rem;
   display: flex;
-  justify-content: center;
-  gap: 0.7rem;
   flex-wrap: wrap;
+  gap: 0.6rem;
 }
 
-.control-btn {
-  border: 0;
+button {
+  border: none;
   border-radius: 999px;
-  padding: 0.7rem 1.1rem;
+  padding: 0.6rem 1rem;
   font-weight: 700;
-  background: var(--primary);
-  color: #fff;
   cursor: pointer;
+  background: var(--accent);
+  color: #032135;
 }
 
-.control-btn.alt {
-  background: var(--secondary);
+button:hover,
+button:focus-visible {
+  filter: brightness(1.06);
 }
 
-@media (min-width: 900px) {
-  .app {
-    padding: 2rem;
-  }
+.tips {
+  margin-top: 0.7rem;
+  color: #b6c7ec;
+}
 
-  .control-btn {
-    font-size: 1rem;
+.tips h2 {
+  margin: 0.2rem 0;
+  font-size: 1rem;
+}
+
+.tips ul {
+  margin: 0;
+  padding-left: 1rem;
+}
+
+@media (max-width: 740px) {
+  .hud-grid {
+    grid-template-columns: repeat(2, minmax(120px, 1fr));
   }
 }
